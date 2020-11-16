@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import App from "./components/App";
-import { SeatContext } from "./components/SeatContext";
+import { SeatProvider } from "./components/SeatContext";
 
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(
-  <SeatContext>
+  <SeatProvider>
     <App />
-  </SeatContext>,
+  </SeatProvider>,
   rootElement
 );

@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { SeatContext } from "./SeatContext";
 import GlobalStyles from "./GlobalStyles";
 import TicketWidget from "./TicketWidget";
@@ -19,9 +20,22 @@ function App() {
     <>
       <GlobalStyles />
       <h1>This venue has {numOfRows} rows!</h1>
-      <TicketWidget />
+      <Wrapper>
+        <TicketWidget />
+      </Wrapper>
     </>
   );
 }
+
+const Wrapper = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default App;

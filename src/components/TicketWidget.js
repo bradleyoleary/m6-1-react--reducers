@@ -13,38 +13,40 @@ const TicketWidget = () => {
   // const seatsPerRow = 6;
 
   const {
-    state: { numOfRows, seatsPerRow, hasLoaded },
+    state: { numOfRows, seatsPerRow, hasLoaded, seats },
   } = React.useContext(SeatContext);
 
   // TODO: implement the loading spinner <CircularProgress />
   // with the hasLoaded flag
 
+  if (!hasLoaded) {
+    return <CircularProgress />;
+  }
+
   return (
     <Wrapper>
-      {!hasLoaded ? (
-        <CircularProgress />
-      ) : (
-        <>
-          {range(numOfRows).map((rowIndex) => {
-            const rowName = getRowName(rowIndex);
+      {range(numOfRows).map((rowIndex) => {
+        const rowName = getRowName(rowIndex);
 
-            return (
-              <Row key={rowIndex}>
-                <RowLabel>Row {rowName}</RowLabel>
-                {range(seatsPerRow).map((seatIndex) => {
-                  const seatId = `${rowName}-${getSeatNum(seatIndex)}`;
+        return (
+          <Row key={rowIndex}>
+            <RowLabel>Row {rowName}</RowLabel>
+            {range(seatsPerRow).map((seatIndex) => {
+              const seatId = `${rowName}-${getSeatNum(seatIndex)}`;
 
-                  return (
-                    <SeatWrapper key={seatId}>
-                      <Seat />
-                    </SeatWrapper>
-                  );
-                })}
-              </Row>
-            );
-          })}
-        </>
-      )}
+              return (
+                <SeatWrapper key={seatId}>
+                  <Seat
+                    isBooked={seats[seatId].isBooked}
+                    seatId={seatId}
+                    price={seats[seatId].price}
+                  />
+                </SeatWrapper>
+              );
+            })}
+          </Row>
+        );
+      })}
     </Wrapper>
   );
 };

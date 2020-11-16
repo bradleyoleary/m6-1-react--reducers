@@ -13,11 +13,13 @@ const Seat = ({ isBooked, seatId, price }) => {
   //console.log(seat);
   //if seat is booked, grey out the img and make the seat disabled
   return isBooked ? (
-    <SeatImg
-      alt="seat"
-      src={seatSrc}
-      style={{ filter: isBooked && "grayscale(100%)" }}
-    />
+    <StyledBtn disabled={true}>
+      <SeatImg
+        alt="seat"
+        src={seatSrc}
+        style={{ filter: isBooked && "grayscale(100%)" }}
+      />
+    </StyledBtn>
   ) : (
     <Tippy
       content={
@@ -27,13 +29,19 @@ const Seat = ({ isBooked, seatId, price }) => {
       }
       theme="material"
     >
-      <SeatImg alt="seat" src={seatSrc} />
+      <StyledBtn>
+        <SeatImg alt="seat" src={seatSrc} />
+      </StyledBtn>
     </Tippy>
   );
 };
 
 const SeatImg = styled.img`
   cursor: pointer;
+`;
+
+const StyledBtn = styled.button`
+  border: none;
 `;
 
 export default Seat;

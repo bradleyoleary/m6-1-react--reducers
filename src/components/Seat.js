@@ -4,12 +4,16 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/material.css";
 import seatSrc from "../assets/seat-available.svg";
+import { BookingContext } from "./BookingContext";
 
 const Seat = ({ isBooked, seatId, price }) => {
   //console.log(seatId);
   const arr = seatId.split("-");
   const row = arr[0];
   const seat = arr[1];
+  const {
+    actions: { beginBookingProcess },
+  } = React.useContext(BookingContext);
   //console.log(seat);
   //if seat is booked, grey out the img and make the seat disabled
   return isBooked ? (
@@ -29,7 +33,11 @@ const Seat = ({ isBooked, seatId, price }) => {
       }
       theme="material"
     >
-      <StyledBtn>
+      <StyledBtn
+        onClick={() => {
+          beginBookingProcess({ seatId, price });
+        }}
+      >
         <SeatImg alt="seat" src={seatSrc} />
       </StyledBtn>
     </Tippy>
